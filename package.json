@@ -9,7 +9,7 @@
     "node": ">=13"
   },
   "scripts": {
-    "build": "parcel build ./src/pages/index.html",
+    "build": "parcel build ./src/pages/**/*.html",
     "dev": "parcel ./src/pages/**/*.html",
     "fix": "npm run lint:fix:css && npm run lint:fix:html",
     "lint": "npm run lint:css && npm run lint:html && npm run lint:js",
