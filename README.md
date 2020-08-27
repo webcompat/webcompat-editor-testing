@@ -28,10 +28,12 @@ npm run build
 npm run lint
 ```
 
-### [Code of Conduct]
+### Code of Conduct
 
-Webcompat has adopted a Code of Conduct that we expect project participants to adhere to. Please read [the full text] so that you can understand what actions will and will not be tolerated.
+Webcompat has adopted a Code of Conduct that we expect project participants to adhere to. Please read [the full text](./CODE_OF_CONDUCT.md) so that you can understand what actions will and will not be tolerated.
 
 ### License
 
 [MPL 2](./LICENSE)
+
+
