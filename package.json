@@ -10,6 +10,7 @@
   },
   "scripts": {
     "build": "parcel build ./src/pages/**/*.html",
+    "build:ghPage": "parcel build ./src/pages/**/*.html --public-url https://webcompat.github.io/webcompat-editor-testing/",
     "dev": "parcel ./src/pages/**/*.html",
     "fix": "npm run lint:fix:css && npm run lint:fix:html",
     "lint": "npm run lint:css && npm run lint:html && npm run lint:js",

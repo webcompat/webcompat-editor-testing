@@ -47,7 +47,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Run build
-          command: npm run build
+          command: npm run build:ghPage
       - run:
           name: Chmod
           command: chmod +x ./scripts/deploy.sh
