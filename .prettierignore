@@ -1,0 +1,9 @@
+
+# Ignore artifacts:
+build
+coverage
+.github
+.circleci
+dist
+node_modules
+scripts
