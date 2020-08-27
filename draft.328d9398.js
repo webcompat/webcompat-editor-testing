@@ -371,4 +371,4 @@ var e=arguments[3],t=require("object-assign");function o(){return(o=t||function(
 },{"react":"ccIB","draft-js":"LBfl"}],"yMO6":[function(require,module,exports) {
 "use strict";var e=u(require("react")),r=u(require("react-dom")),t=u(require("./RichEditor"));function u(e){return e&&e.__esModule?e:{default:e}}r.default.render(e.default.createElement(t.default,null),document.getElementById("draft-editor-container"));
 },{"react":"ccIB","react-dom":"x9tB","./RichEditor":"lvlP"}]},{},["yMO6"], null)
-//# sourceMappingURL=/draft.328d9398.js.map
+//# sourceMappingURL=https://webcompat.github.io/webcompat-editor-testing/draft.328d9398.js.map

@@ -19,4 +19,4 @@ var t,e=require("buffer").Buffer;!function(e,n){"object"==typeof exports&&"objec
 },{"buffer":"fe91"}],"JZac":[function(require,module,exports) {
 "use strict";var e=l(require("quill/dist/quill.min"));function l(e){return e&&e.__esModule?e:{default:e}}require("quill/dist/quill.core");var i=new e.default("#quill-editor-container",{modules:{toolbar:[[{header:[1,2,!1]}],["bold","italic","underline"],["image","code-block"]]},placeholder:"Compose an epic...",theme:"snow"});
 },{"quill/dist/quill.min":"Bn9S","quill/dist/quill.core":"htYj"}]},{},["JZac"], null)
-//# sourceMappingURL=/quill.b4ea3c2d.js.map
+//# sourceMappingURL=https://webcompat.github.io/webcompat-editor-testing/quill.b4ea3c2d.js.map
