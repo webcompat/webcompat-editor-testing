@@ -857,8 +857,10 @@ http://trix-editor.org/
                   (i = t.getData("text/plain")),
                   (n = t.getData("text/html")),
                   i && n
-                    ? ((e = new DOMParser().parseFromString(n, "text/html")
-                        .body),
+                    ? ((e = new DOMParser().parseFromString(
+                        n,
+                        "text/html"
+                      ).body),
                       e.textContent === i ? !e.querySelector("*") : void 0)
                     : null != i
                     ? i.length
@@ -980,14 +982,15 @@ http://trix-editor.org/
                 }),
                 (o.prototype.toArray = function () {
                   var t, e, n;
-                  return (null != this.array
-                    ? this.array
-                    : (this.array = function () {
-                        var i;
-                        (e = []), (i = this.values);
-                        for (t in i) (n = i[t]), e.push(t, n);
-                        return e;
-                      }.call(this))
+                  return (
+                    null != this.array
+                      ? this.array
+                      : (this.array = function () {
+                          var i;
+                          (e = []), (i = this.values);
+                          for (t in i) (n = i[t]), e.push(t, n);
+                          return e;
+                        }.call(this))
                   ).slice(0);
                 }),
                 (o.prototype.toObject = function () {
@@ -4312,12 +4315,13 @@ http://trix-editor.org/
                 (s.prototype.createNodes = function () {
                   var e, n, o, r, s, u, c;
                   if (
-                    ((e = r = i({
-                      tagName: "figure",
-                      className: this.getClassName(),
-                      data: this.getData(),
-                      editable: !1,
-                    })),
+                    ((e = r =
+                      i({
+                        tagName: "figure",
+                        className: this.getClassName(),
+                        data: this.getData(),
+                        editable: !1,
+                      })),
                     (n = this.getHref()) &&
                       ((r = i({
                         tagName: "a",
@@ -5149,9 +5153,10 @@ http://trix-editor.org/
                   )
                     return (
                       this.uninstallAttachmentEditor(),
-                      (i = this.composition.document.getAttachmentPieceForAttachment(
-                        t
-                      )),
+                      (i =
+                        this.composition.document.getAttachmentPieceForAttachment(
+                          t
+                        )),
                       (this.attachmentEditor = new e.AttachmentEditorController(
                         i,
                         o,
@@ -5170,52 +5175,48 @@ http://trix-editor.org/
                 (c.prototype.didUninstallAttachmentEditor = function () {
                   return (this.attachmentEditor = null), this.render();
                 }),
-                (c.prototype.attachmentEditorDidRequestUpdatingAttributesForAttachment = function (
-                  t,
-                  e
-                ) {
-                  var n;
-                  return (
-                    null != (n = this.delegate) &&
+                (c.prototype.attachmentEditorDidRequestUpdatingAttributesForAttachment =
+                  function (t, e) {
+                    var n;
+                    return (
+                      null != (n = this.delegate) &&
+                        "function" ==
+                          typeof n.compositionControllerWillUpdateAttachment &&
+                        n.compositionControllerWillUpdateAttachment(e),
+                      this.composition.updateAttributesForAttachment(t, e)
+                    );
+                  }),
+                (c.prototype.attachmentEditorDidRequestRemovingAttributeForAttachment =
+                  function (t, e) {
+                    var n;
+                    return (
+                      null != (n = this.delegate) &&
+                        "function" ==
+                          typeof n.compositionControllerWillUpdateAttachment &&
+                        n.compositionControllerWillUpdateAttachment(e),
+                      this.composition.removeAttributeForAttachment(t, e)
+                    );
+                  }),
+                (c.prototype.attachmentEditorDidRequestRemovalOfAttachment =
+                  function (t) {
+                    var e;
+                    return null != (e = this.delegate) &&
                       "function" ==
-                        typeof n.compositionControllerWillUpdateAttachment &&
-                      n.compositionControllerWillUpdateAttachment(e),
-                    this.composition.updateAttributesForAttachment(t, e)
-                  );
-                }),
-                (c.prototype.attachmentEditorDidRequestRemovingAttributeForAttachment = function (
-                  t,
-                  e
-                ) {
-                  var n;
-                  return (
-                    null != (n = this.delegate) &&
+                        typeof e.compositionControllerDidRequestRemovalOfAttachment
+                      ? e.compositionControllerDidRequestRemovalOfAttachment(t)
+                      : void 0;
+                  }),
+                (c.prototype.attachmentEditorDidRequestDeselectingAttachment =
+                  function (t) {
+                    var e;
+                    return null != (e = this.delegate) &&
                       "function" ==
-                        typeof n.compositionControllerWillUpdateAttachment &&
-                      n.compositionControllerWillUpdateAttachment(e),
-                    this.composition.removeAttributeForAttachment(t, e)
-                  );
-                }),
-                (c.prototype.attachmentEditorDidRequestRemovalOfAttachment = function (
-                  t
-                ) {
-                  var e;
-                  return null != (e = this.delegate) &&
-                    "function" ==
-                      typeof e.compositionControllerDidRequestRemovalOfAttachment
-                    ? e.compositionControllerDidRequestRemovalOfAttachment(t)
-                    : void 0;
-                }),
-                (c.prototype.attachmentEditorDidRequestDeselectingAttachment = function (
-                  t
-                ) {
-                  var e;
-                  return null != (e = this.delegate) &&
-                    "function" ==
-                      typeof e.compositionControllerDidRequestDeselectingAttachment
-                    ? e.compositionControllerDidRequestDeselectingAttachment(t)
-                    : void 0;
-                }),
+                        typeof e.compositionControllerDidRequestDeselectingAttachment
+                      ? e.compositionControllerDidRequestDeselectingAttachment(
+                          t
+                        )
+                      : void 0;
+                  }),
                 (c.prototype.canSyncDocumentView = function () {
                   return !this.isEditingAttachment();
                 }),
@@ -5989,15 +5990,16 @@ http://trix-editor.org/
                   );
                 }),
                 (i.permittedAttributes = ["caption", "presentation"]),
-                (i.prototype.ensureAttachmentExclusivelyHasAttribute = function (
-                  t
-                ) {
-                  return this.hasAttribute(t)
-                    ? (this.attachment.hasAttribute(t) ||
-                        this.attachment.setAttributes(this.attributes.slice(t)),
-                      (this.attributes = this.attributes.remove(t)))
-                    : void 0;
-                }),
+                (i.prototype.ensureAttachmentExclusivelyHasAttribute =
+                  function (t) {
+                    return this.hasAttribute(t)
+                      ? (this.attachment.hasAttribute(t) ||
+                          this.attachment.setAttributes(
+                            this.attributes.slice(t)
+                          ),
+                        (this.attributes = this.attributes.remove(t)))
+                      : void 0;
+                  }),
                 (i.prototype.removeProhibitedAttributes = function () {
                   var t;
                   return (
@@ -7275,9 +7277,8 @@ http://trix-editor.org/
             (e.HTMLParser = (function (d) {
               function g(t, e) {
                 (this.html = t),
-                  (this.referenceElement = (null != e
-                    ? e
-                    : {}
+                  (this.referenceElement = (
+                    null != e ? e : {}
                   ).referenceElement),
                   (this.blocks = []),
                   (this.blockElements = []),
@@ -7371,10 +7372,8 @@ http://trix-editor.org/
                             : void 0
                         ))
                       ? void 0
-                      : ((this.currentBlock = this.appendBlockForAttributesWithElement(
-                          n,
-                          i
-                        )),
+                      : ((this.currentBlock =
+                          this.appendBlockForAttributesWithElement(n, i)),
                         (this.currentBlockElement = i))
                   );
                 }),
@@ -7392,10 +7391,8 @@ http://trix-editor.org/
                     )
                       return o && t(n, this.currentBlock.attributes)
                         ? this.appendStringWithAttributes("\n")
-                        : ((this.currentBlock = this.appendBlockForAttributesWithElement(
-                            n,
-                            e
-                          )),
+                        : ((this.currentBlock =
+                            this.appendBlockForAttributesWithElement(n, e)),
                           (this.currentBlockElement = e));
                   } else if (this.currentBlockElement && !o && !r)
                     return (s = this.findParentBlockElement(e))
@@ -7678,28 +7675,29 @@ http://trix-editor.org/
                 (C = function (t) {
                   return t && !E(t.textContent);
                 }),
-                (g.prototype.translateBlockElementMarginsToNewlines = function () {
-                  var t, e, n, i, o, r, s, a;
-                  for (
-                    e = this.getMarginOfDefaultBlockElement(),
-                      s = this.blocks,
-                      a = [],
-                      i = n = 0,
-                      o = s.length;
-                    o > n;
-                    i = ++n
-                  )
-                    (t = s[i]),
-                      (r = this.getMarginOfBlockElementAtIndex(i)) &&
-                        (r.top > 2 * e.top &&
-                          this.prependStringToTextAtIndex("\n", i),
-                        a.push(
-                          r.bottom > 2 * e.bottom
-                            ? this.appendStringToTextAtIndex("\n", i)
-                            : void 0
-                        ));
-                  return a;
-                }),
+                (g.prototype.translateBlockElementMarginsToNewlines =
+                  function () {
+                    var t, e, n, i, o, r, s, a;
+                    for (
+                      e = this.getMarginOfDefaultBlockElement(),
+                        s = this.blocks,
+                        a = [],
+                        i = n = 0,
+                        o = s.length;
+                      o > n;
+                      i = ++n
+                    )
+                      (t = s[i]),
+                        (r = this.getMarginOfBlockElementAtIndex(i)) &&
+                          (r.top > 2 * e.top &&
+                            this.prependStringToTextAtIndex("\n", i),
+                          a.push(
+                            r.bottom > 2 * e.bottom
+                              ? this.appendStringToTextAtIndex("\n", i)
+                              : void 0
+                          ));
+                    return a;
+                  }),
                 (g.prototype.getMarginOfBlockElementAtIndex = function (t) {
                   var e, n;
                   return !(e = this.blockElements[t]) ||
@@ -7985,13 +7983,14 @@ http://trix-editor.org/
                           m.getBlockBreakPosition() !== b &&
                           "\n" === m.text.getStringAtPosition(b)),
                         f
-                          ? (r = this.blockList.editObjectAtIndex(y, function (
-                              t
-                            ) {
-                              return t.copyWithText(
-                                t.text.removeTextAtRange([b, b + 1])
-                              );
-                            }))
+                          ? (r = this.blockList.editObjectAtIndex(
+                              y,
+                              function (t) {
+                                return t.copyWithText(
+                                  t.text.removeTextAtRange([b, b + 1])
+                                );
+                              }
+                            ))
                           : ((h = s.text.getTextAtRange([0, c])),
                             (x = m.text.getTextAtRange([b, m.getLength()])),
                             (C = h.appendText(x)),
@@ -9562,15 +9561,17 @@ http://trix-editor.org/
                       : void 0
                   );
                 }),
-                (d.prototype.notifyDelegateOfCurrentAttributesChange = function () {
-                  var t;
-                  return null != (t = this.delegate) &&
-                    "function" == typeof t.compositionDidChangeCurrentAttributes
-                    ? t.compositionDidChangeCurrentAttributes(
-                        this.currentAttributes
-                      )
-                    : void 0;
-                }),
+                (d.prototype.notifyDelegateOfCurrentAttributesChange =
+                  function () {
+                    var t;
+                    return null != (t = this.delegate) &&
+                      "function" ==
+                        typeof t.compositionDidChangeCurrentAttributes
+                      ? t.compositionDidChangeCurrentAttributes(
+                          this.currentAttributes
+                        )
+                      : void 0;
+                  }),
                 (d.prototype.notifyDelegateOfInsertionAtRange = function (t) {
                   var e;
                   return null != (e = this.delegate) &&
@@ -9735,9 +9736,8 @@ http://trix-editor.org/
                         ((o[0] += i),
                         (o[1] += i),
                         "\n" !== this.document.getCharacterAtPosition(o[1]) &&
-                          ((this.document = this.document.insertBlockBreakAtRange(
-                            o[1]
-                          )),
+                          ((this.document =
+                            this.document.insertBlockBreakAtRange(o[1])),
                           o[1] < this.selectedRange[1] &&
                             this.moveSelectedRangeForward(),
                           o[1]++,
@@ -9745,19 +9745,15 @@ http://trix-editor.org/
                         0 !== o[0] &&
                           "\n" !==
                             this.document.getCharacterAtPosition(o[0] - 1) &&
-                          ((this.document = this.document.insertBlockBreakAtRange(
-                            o[0]
-                          )),
+                          ((this.document =
+                            this.document.insertBlockBreakAtRange(o[0])),
                           o[0] < this.selectedRange[0] &&
                             this.moveSelectedRangeForward(),
                           o[0]++,
                           i++),
                         s.push(
-                          (this.document = this.document.applyBlockAttributeAtRange(
-                            e,
-                            !0,
-                            o
-                          ))
+                          (this.document =
+                            this.document.applyBlockAttributeAtRange(e, !0, o))
                         ));
                   return s;
                 }),
@@ -10345,16 +10341,17 @@ http://trix-editor.org/
                     0 === this.selectionManagers.length ? this.stop() : void 0
                   );
                 }),
-                (o.prototype.notifySelectionManagersOfSelectionChange = function () {
-                  var t, e, n, i, o;
-                  for (
-                    n = this.selectionManagers, i = [], t = 0, e = n.length;
-                    e > t;
-                    t++
-                  )
-                    (o = n[t]), i.push(o.selectionDidChange());
-                  return i;
-                }),
+                (o.prototype.notifySelectionManagersOfSelectionChange =
+                  function () {
+                    var t, e, n, i, o;
+                    for (
+                      n = this.selectionManagers, i = [], t = 0, e = n.length;
+                      e > t;
+                      t++
+                    )
+                      (o = n[t]), i.push(o.selectionDidChange());
+                    return i;
+                  }),
                 (o.prototype.update = function () {
                   var e;
                   return (
@@ -10777,14 +10774,13 @@ http://trix-editor.org/
                     this.notifyEditorElement("change")
                   );
                 }),
-                (u.prototype.compositionDidChangeAttachmentPreviewURL = function (
-                  t
-                ) {
-                  return (
-                    this.compositionController.invalidateViewForObject(t),
-                    this.notifyEditorElement("change")
-                  );
-                }),
+                (u.prototype.compositionDidChangeAttachmentPreviewURL =
+                  function (t) {
+                    return (
+                      this.compositionController.invalidateViewForObject(t),
+                      this.notifyEditorElement("change")
+                    );
+                  }),
                 (u.prototype.compositionDidRemoveAttachment = function (t) {
                   var e;
                   return (
@@ -10799,9 +10795,10 @@ http://trix-editor.org/
                   e
                 ) {
                   return (
-                    (this.attachmentLocationRange = this.composition.document.getLocationRangeOfAttachment(
-                      t
-                    )),
+                    (this.attachmentLocationRange =
+                      this.composition.document.getLocationRangeOfAttachment(
+                        t
+                      )),
                     this.compositionController.installAttachmentEditorForAttachment(
                       t,
                       e
@@ -10817,15 +10814,15 @@ http://trix-editor.org/
                     (this.attachmentLocationRange = null)
                   );
                 }),
-                (u.prototype.compositionDidRequestChangingSelectionToLocationRange = function (
-                  t
-                ) {
-                  return !this.loadingSnapshot || this.isFocused()
-                    ? ((this.requestedLocationRange = t),
-                      (this.compositionRevisionWhenLocationRangeRequested = this.composition.revision),
-                      this.handlingInput ? void 0 : this.render())
-                    : void 0;
-                }),
+                (u.prototype.compositionDidRequestChangingSelectionToLocationRange =
+                  function (t) {
+                    return !this.loadingSnapshot || this.isFocused()
+                      ? ((this.requestedLocationRange = t),
+                        (this.compositionRevisionWhenLocationRangeRequested =
+                          this.composition.revision),
+                        this.handlingInput ? void 0 : this.render())
+                      : void 0;
+                  }),
                 (u.prototype.compositionWillLoadSnapshot = function () {
                   return (this.loadingSnapshot = !0);
                 }),
@@ -10841,26 +10838,27 @@ http://trix-editor.org/
                 }),
                 u.proxyMethod("getSelectionManager().setLocationRange"),
                 u.proxyMethod("getSelectionManager().getLocationRange"),
-                (u.prototype.attachmentManagerDidRequestRemovalOfAttachment = function (
-                  t
-                ) {
-                  return this.removeAttachment(t);
-                }),
-                (u.prototype.compositionControllerWillSyncDocumentView = function () {
-                  return (
-                    this.inputController.editorWillSyncDocumentView(),
-                    this.selectionManager.lock(),
-                    this.selectionManager.clearSelection()
-                  );
-                }),
-                (u.prototype.compositionControllerDidSyncDocumentView = function () {
-                  return (
-                    this.inputController.editorDidSyncDocumentView(),
-                    this.selectionManager.unlock(),
-                    this.updateCurrentActions(),
-                    this.notifyEditorElement("sync")
-                  );
-                }),
+                (u.prototype.attachmentManagerDidRequestRemovalOfAttachment =
+                  function (t) {
+                    return this.removeAttachment(t);
+                  }),
+                (u.prototype.compositionControllerWillSyncDocumentView =
+                  function () {
+                    return (
+                      this.inputController.editorWillSyncDocumentView(),
+                      this.selectionManager.lock(),
+                      this.selectionManager.clearSelection()
+                    );
+                  }),
+                (u.prototype.compositionControllerDidSyncDocumentView =
+                  function () {
+                    return (
+                      this.inputController.editorDidSyncDocumentView(),
+                      this.selectionManager.unlock(),
+                      this.updateCurrentActions(),
+                      this.notifyEditorElement("sync")
+                    );
+                  }),
                 (u.prototype.compositionControllerDidRender = function () {
                   return (
                     null != this.requestedLocationRange &&
@@ -10870,13 +10868,15 @@ http://trix-editor.org/
                           this.requestedLocationRange
                         ),
                       (this.requestedLocationRange = null),
-                      (this.compositionRevisionWhenLocationRangeRequested = null)),
+                      (this.compositionRevisionWhenLocationRangeRequested =
+                        null)),
                     this.renderedCompositionRevision !==
                       this.composition.revision &&
                       (this.runEditorFilters(),
                       this.composition.updateCurrentAttributes(),
                       this.notifyEditorElement("render")),
-                    (this.renderedCompositionRevision = this.composition.revision)
+                    (this.renderedCompositionRevision =
+                      this.composition.revision)
                   );
                 }),
                 (u.prototype.compositionControllerDidFocus = function () {
@@ -10890,42 +10890,37 @@ http://trix-editor.org/
                 (u.prototype.compositionControllerDidBlur = function () {
                   return this.notifyEditorElement("blur");
                 }),
-                (u.prototype.compositionControllerDidSelectAttachment = function (
-                  t,
-                  e
-                ) {
-                  return (
-                    this.toolbarController.hideDialog(),
-                    this.composition.editAttachment(t, e)
-                  );
-                }),
-                (u.prototype.compositionControllerDidRequestDeselectingAttachment = function (
-                  t
-                ) {
-                  var e, n;
-                  return (
-                    (e =
-                      null != (n = this.attachmentLocationRange)
-                        ? n
-                        : this.composition.document.getLocationRangeOfAttachment(
-                            t
-                          )),
-                    this.selectionManager.setLocationRange(e[1])
-                  );
-                }),
-                (u.prototype.compositionControllerWillUpdateAttachment = function (
-                  t
-                ) {
-                  return this.editor.recordUndoEntry("Edit Attachment", {
-                    context: t.id,
-                    consolidatable: !0,
-                  });
-                }),
-                (u.prototype.compositionControllerDidRequestRemovalOfAttachment = function (
-                  t
-                ) {
-                  return this.removeAttachment(t);
-                }),
+                (u.prototype.compositionControllerDidSelectAttachment =
+                  function (t, e) {
+                    return (
+                      this.toolbarController.hideDialog(),
+                      this.composition.editAttachment(t, e)
+                    );
+                  }),
+                (u.prototype.compositionControllerDidRequestDeselectingAttachment =
+                  function (t) {
+                    var e, n;
+                    return (
+                      (e =
+                        null != (n = this.attachmentLocationRange)
+                          ? n
+                          : this.composition.document.getLocationRangeOfAttachment(
+                              t
+                            )),
+                      this.selectionManager.setLocationRange(e[1])
+                    );
+                  }),
+                (u.prototype.compositionControllerWillUpdateAttachment =
+                  function (t) {
+                    return this.editor.recordUndoEntry("Edit Attachment", {
+                      context: t.id,
+                      consolidatable: !0,
+                    });
+                  }),
+                (u.prototype.compositionControllerDidRequestRemovalOfAttachment =
+                  function (t) {
+                    return this.removeAttachment(t);
+                  }),
                 (u.prototype.inputControllerWillHandleInput = function () {
                   return (this.handlingInput = !0), (this.requestedRender = !1);
                 }),
@@ -10940,9 +10935,10 @@ http://trix-editor.org/
                       : void 0
                   );
                 }),
-                (u.prototype.inputControllerDidAllowUnhandledInput = function () {
-                  return this.notifyEditorElement("change");
-                }),
+                (u.prototype.inputControllerDidAllowUnhandledInput =
+                  function () {
+                    return this.notifyEditorElement("change");
+                  }),
                 (u.prototype.inputControllerDidRequestReparse = function () {
                   return this.reparse();
                 }),
@@ -10984,13 +10980,13 @@ http://trix-editor.org/
                 (u.prototype.inputControllerWillPerformRedo = function () {
                   return this.editor.redo();
                 }),
-                (u.prototype.inputControllerDidReceiveKeyboardCommand = function (
-                  t
-                ) {
-                  return this.toolbarController.applyKeyboardCommand(t);
-                }),
+                (u.prototype.inputControllerDidReceiveKeyboardCommand =
+                  function (t) {
+                    return this.toolbarController.applyKeyboardCommand(t);
+                  }),
                 (u.prototype.inputControllerDidStartDrag = function () {
-                  return (this.locationRangeBeforeDrag = this.selectionManager.getLocationRange());
+                  return (this.locationRangeBeforeDrag =
+                    this.selectionManager.getLocationRange());
                 }),
                 (u.prototype.inputControllerDidReceiveDragOverPoint = function (
                   t
